@@ -16,6 +16,8 @@ export class AppComponent {
   }
 
   searchResults(e: any) {
+    // See History for Caching
+    console.log(e);
     this.history = e;
   }
 }
