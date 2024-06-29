@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "nasa-api:build:production"
+              "buildTarget": "nasa-api:build:production"
             },
             "development": {
-              "browserTarget": "nasa-api:build:development"
+              "buildTarget": "nasa-api:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +76,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "nasa-api:build"
+            "buildTarget": "nasa-api:build"
           }
         },
         "test": {
