@@ -18,9 +18,7 @@ export class NasaSearchService implements OnDestroy {
   private unsubscribe$ = new Subject<void>();
   private dateSource$ = new BehaviorSubject<DateInterface>(this.chosenDate!);
   private mediaSource$ = new BehaviorSubject<NasaInterface[]>(this.result);
-  private datePickerSource$ = new BehaviorSubject<boolean>(
-    this.datePickerStatus
-  );
+  private datePickerSource$ = new BehaviorSubject<boolean>(this.datePickerStatus);
 
   chosenDateValue$ = this.dateSource$.asObservable();
   chosenMedia$ = this.mediaSource$.asObservable();
@@ -45,9 +43,7 @@ export class NasaSearchService implements OnDestroy {
 
     // Fetch via Environment URL & API Key
     this._http
-      .get<NasaInterface[]>(
-        environment.apiURL + environment.key + "&date=" + date
-      )
+      .get<NasaInterface[]>(environment.apiURL + environment.key + "&date=" + date)
       .pipe(
         takeUntil(this.unsubscribe$),
         map((data) => {
@@ -55,15 +51,15 @@ export class NasaSearchService implements OnDestroy {
         })
       )
       .subscribe(() => {
-        this.navigateToRoute(date);
+        // this.navigateToRoute(date);
         this.mediaSource$.next(this.result);
       });
   }
 
   // Append Parameters
-  navigateToRoute(date: string) {
-    this._router.navigate(["/apod"], { queryParams: { date: date } });
-  }
+  // navigateToRoute(date: string) {
+  //   this._router.navigate(["/apod"], { queryParams: { date: date } });
+  // }
 
   // Life Cycle to Kill Subscriptions
   ngOnDestroy(): void {
