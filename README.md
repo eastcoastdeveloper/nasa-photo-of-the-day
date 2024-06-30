@@ -1,6 +1,10 @@
-# Nasa API
+# NASA API
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.4.
+Astronomy Picture of the Day: https://api.nasa.gov/<br />
+Then go to to Generate API Key<br />
+Plug the API key into the environment.ts file in the environments directory<br />
+key: "YOUR API KEY"<br />
+ng serve to run the app
 
 ## Development server
 
