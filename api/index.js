@@ -10,8 +10,9 @@ const API_KEY = process.env.API_KEY;
 const API_BASE_URL = "https://api.nasa.gov";
 
 app.get("/api/data", async (req, res) => {
+  const date = req.query.date;
   try {
-    const response = await axios.get(`${API_BASE_URL}/planetary/apod?api_key=${API_KEY}`);
+    const response = await axios.get(`${API_BASE_URL}/planetary/apod?api_key=${API_KEY}&date=${date}`);
     res.json(response.data);
   } catch (error) {
     res.status(500).json({ error: "An error occurred" });

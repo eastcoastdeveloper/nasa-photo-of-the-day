@@ -30,7 +30,7 @@ export class NasaSearchService implements OnDestroy {
     return newVal;
   }
 
-  private apiUrl = "http://localhost:4200/api/data"; // URL to your backend
+  private apiUrl = "http://localhost:3000/api/data"; // URL to your backend
 
   fetchData(time: number) {
     // Extrapolate Date from Timestamp (1691478000000)
@@ -44,10 +44,15 @@ export class NasaSearchService implements OnDestroy {
 
     // Fetch via Environment URL & API Key
     this._http
-      .get<NasaInterface[]>(this.apiUrl)
+      .get<NasaInterface[]>(this.apiUrl, {
+        params: {
+          date: date,
+        },
+      })
       .pipe(
         takeUntil(this.unsubscribe$),
         map((data) => {
+          console.log({ year: year, month: month, day: day });
           this.result = data;
         })
       )
