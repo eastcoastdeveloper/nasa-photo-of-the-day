@@ -3,7 +3,6 @@ import { Injectable, OnDestroy } from "@angular/core";
 import { BehaviorSubject, Subject } from "rxjs";
 import { map, takeUntil } from "rxjs/operators";
 import { NasaInterface } from "../interfaces/nasa.interface";
-import { Router } from "@angular/router";
 import { DateInterface } from "../interfaces/date.interface";
 
 @Injectable({
@@ -23,14 +22,14 @@ export class NasaSearchService implements OnDestroy {
   chosenMedia$ = this.mediaSource$.asObservable();
   dataPickerCurrentVal = this.datePickerSource$.asObservable();
 
-  constructor(private _http: HttpClient, private _router: Router) {}
+  constructor(private _http: HttpClient) {}
 
   changeDatePickerVal(newVal: boolean) {
     this.datePickerSource$.next(newVal);
     return newVal;
   }
 
-  private apiUrl = "http://localhost:3000/api/data"; // URL to your backend
+  private apiUrl = "http://localhost:3000/api/nasa"; // URL to your backend
 
   fetchData(time: number) {
     // Extrapolate Date from Timestamp (1691478000000)
@@ -52,7 +51,6 @@ export class NasaSearchService implements OnDestroy {
       .pipe(
         takeUntil(this.unsubscribe$),
         map((data) => {
-          console.log({ year: year, month: month, day: day });
           this.result = data;
         })
       )
