@@ -1,23 +1,14 @@
 const express = require("express");
-const axios = require("axios");
+const helmet = require("helmet");
 const cors = require("cors");
-require("dotenv").config();
 
 const app = express();
 app.use(cors());
+app.use(helmet());
 
-const API_KEY = process.env.API_KEY;
-const API_BASE_URL = "https://api.nasa.gov";
-
-app.get("/api/data", async (req, res) => {
-  const date = req.query.date;
-  try {
-    const response = await axios.get(`${API_BASE_URL}/planetary/apod?api_key=${API_KEY}&date=${date}`);
-    res.json(response.data);
-  } catch (error) {
-    res.status(500).json({ error: "An error occurred" });
-  }
-});
+app.use("/api/nasa", require("./routes/nasa"));
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+module.exports = app;
